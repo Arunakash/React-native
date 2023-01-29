@@ -6,6 +6,7 @@ import  Octicons  from 'react-native-vector-icons/Octicons';
 import {TouchableRipple} from 'react-native-paper';
 import { useDispatch,useSelector } from 'react-redux';
 import { Menu, MenuItem, MenuDivider } from 'react-native-material-menu';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Header = (props) =>{
     const [visible, setVisible] = useState(false);
@@ -13,7 +14,12 @@ const Header = (props) =>{
     const hideMenu = () => setVisible(false);
     const showMenu = () => setVisible(true);
     const state= useSelector((state) => state);
-
+   
+    const signOut = async () =>{ // need to add
+        let data = await AsyncStorage.clear().then(res =>{
+            props.navigation.navigate("SignIn")
+        });
+      }
 
     return(
         <View style={{overflow:'hidden',paddingBottom:5}}>
@@ -40,8 +46,9 @@ const Header = (props) =>{
                   </Menu>
                 </View>
                 <View name="row2" style={{flexDirection:'row',alignItems:'center'}}>
-                   {/* <Octicons name="search" size={22} color="black" style={{paddingHorizontal:30}}/>
-                   <Ionicons name="ellipsis-vertical-sharp" size={24} color="black"/> */}
+                   <TouchableRipple onPress={()=>{signOut()}} rippleColor={"#6A5ACD"}>
+                    <Text style={{color:"#6A5ACD",paddingRight:10,fontWeight:'bold'}} >Sign-out</Text>
+                   </TouchableRipple>
                 </View>
             </View>
             {/* <TouchableRipple style={styles.rippleStyle} borderless={true} onPress={() =>{console.log("hdghdghd")}}>

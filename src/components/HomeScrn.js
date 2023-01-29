@@ -72,7 +72,8 @@ const onDismissSnackBar = () => setVisibleSnackBar(false);
     return(
         <View style={{flex:1,paddingTop:Platform.OS === "android"?StatusBar.currentHeight:"",backgroundColor:"#fff"}}>
          <View name="Header-holder">
-             <Header selectTaskList={selectTaskList}></Header>
+             <Header selectTaskList={selectTaskList} navigation={props.navigation}></Header>
+             
          </View>
           <View name="content-container" style={{flex:1,position:'relative'}}>
             <View name="task-container" style={{flex:1,position:'relative'}}>
